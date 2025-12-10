@@ -1,5 +1,5 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import * as React from "react";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { NavLink } from "./-components/nav-link";
 
 export const Route = createRootRoute({
 	component: RootComponent,
@@ -7,14 +7,12 @@ export const Route = createRootRoute({
 
 function RootComponent() {
 	return (
-		<React.Fragment>
-			<Link activeProps={{ className: "text-blue-500 font-bold" }} to="/">
-				Main Page
-			</Link>
-			<Link activeProps={{ className: "text-blue-500 font-bold" }} to="/about">
-				About Page
-			</Link>
+		<div className="container mx-auto max-w-xl">
+			<div className="space-x-2">
+				<NavLink to="/">Main Page</NavLink>
+				<NavLink to="/about">About Page</NavLink>
+			</div>
 			<Outlet />
-		</React.Fragment>
+		</div>
 	);
 }
