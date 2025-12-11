@@ -11,6 +11,7 @@ function RootComponent() {
 			<div className="space-x-2">
 				<NavLink to="/">Main Page</NavLink>
 				<NavLink to="/about">About Page</NavLink>
+				<NavLink to="/contact-us">Contact Us</NavLink>
 			</div>
 			<Outlet />
 		</div>

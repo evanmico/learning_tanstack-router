@@ -3,6 +3,7 @@ import { routeTree } from "./routeTree.gen";
 
 const router = createRouter({
 	routeTree,
+	defaultPreload: "intent", // adds preloading support on hover by default
 });
 
 declare module "@tanstack/react-router" {
