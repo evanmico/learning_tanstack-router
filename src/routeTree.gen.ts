@@ -13,6 +13,7 @@ import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactUsCountryRouteImport } from './routes/contact-us.$country'
+import { Route as publicSearchRouteRouteImport } from './routes/(public)/search/route'
 import { Route as publicCategoriesRouteRouteImport } from './routes/(public)/categories/route'
 import { Route as ContactUsCountryCityRouteImport } from './routes/contact-us.$country.$city'
 import { Route as publicCategoriesCategoryIdRouteRouteImport } from './routes/(public)/categories/$categoryId/route'
@@ -38,6 +39,11 @@ const ContactUsCountryRoute = ContactUsCountryRouteImport.update({
   id: '/$country',
   path: '/$country',
   getParentRoute: () => ContactUsRoute,
+} as any)
+const publicSearchRouteRoute = publicSearchRouteRouteImport.update({
+  id: '/(public)/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const publicCategoriesRouteRoute = publicCategoriesRouteRouteImport.update({
   id: '/(public)/categories',
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact-us': typeof ContactUsRouteWithChildren
   '/categories': typeof publicCategoriesRouteRouteWithChildren
+  '/search': typeof publicSearchRouteRoute
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact-us': typeof ContactUsRouteWithChildren
   '/categories': typeof publicCategoriesRouteRouteWithChildren
+  '/search': typeof publicSearchRouteRoute
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact-us': typeof ContactUsRouteWithChildren
   '/(public)/categories': typeof publicCategoriesRouteRouteWithChildren
+  '/(public)/search': typeof publicSearchRouteRoute
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/(public)/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact-us'
     | '/categories'
+    | '/search'
     | '/contact-us/$country'
     | '/categories/$categoryId'
     | '/contact-us/$country/$city'
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact-us'
     | '/categories'
+    | '/search'
     | '/contact-us/$country'
     | '/categories/$categoryId'
     | '/contact-us/$country/$city'
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact-us'
     | '/(public)/categories'
+    | '/(public)/search'
     | '/contact-us/$country'
     | '/(public)/categories/$categoryId'
     | '/contact-us/$country/$city'
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactUsRoute: typeof ContactUsRouteWithChildren
   publicCategoriesRouteRoute: typeof publicCategoriesRouteRouteWithChildren
+  publicSearchRouteRoute: typeof publicSearchRouteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/contact-us/$country'
       preLoaderRoute: typeof ContactUsCountryRouteImport
       parentRoute: typeof ContactUsRoute
+    }
+    '/(public)/search': {
+      id: '/(public)/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof publicSearchRouteRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(public)/categories': {
       id: '/(public)/categories'
@@ -285,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactUsRoute: ContactUsRouteWithChildren,
   publicCategoriesRouteRoute: publicCategoriesRouteRouteWithChildren,
+  publicSearchRouteRoute: publicSearchRouteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
