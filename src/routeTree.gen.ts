@@ -9,10 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactUsCountryRouteImport } from './routes/contact-us.$country'
+import { Route as AuthClientRouteRouteImport } from './routes/_auth/client/route'
+import { Route as AuthAdminRouteRouteImport } from './routes/_auth/admin/route'
 import { Route as publicSearchRouteRouteImport } from './routes/(public)/search/route'
 import { Route as publicCategoriesRouteRouteImport } from './routes/(public)/categories/route'
 import { Route as ContactUsCountryCityRouteImport } from './routes/contact-us.$country.$city'
@@ -20,6 +24,11 @@ import { Route as publicCategoriesCategoryIdRouteRouteImport } from './routes/(p
 import { Route as publicCategoriesCategoryIdSubcategoryIdRouteRouteImport } from './routes/(public)/categories/$categoryId/$subcategoryId/route'
 import { Route as publicCategoriesCategoryIdSubcategoryIdProductIdRouteRouteImport } from './routes/(public)/categories/$categoryId/$subcategoryId/$productId/route'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactUsRoute = ContactUsRouteImport.update({
   id: '/contact-us',
   path: '/contact-us',
@@ -28,6 +37,10 @@ const ContactUsRoute = ContactUsRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRouteRoute = AuthRouteRouteImport.update({
+  id: '/_auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -39,6 +52,16 @@ const ContactUsCountryRoute = ContactUsCountryRouteImport.update({
   id: '/$country',
   path: '/$country',
   getParentRoute: () => ContactUsRoute,
+} as any)
+const AuthClientRouteRoute = AuthClientRouteRouteImport.update({
+  id: '/client',
+  path: '/client',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const AuthAdminRouteRoute = AuthAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthRouteRoute,
 } as any)
 const publicSearchRouteRoute = publicSearchRouteRouteImport.update({
   id: '/(public)/search',
@@ -78,8 +101,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact-us': typeof ContactUsRouteWithChildren
+  '/login': typeof LoginRoute
   '/categories': typeof publicCategoriesRouteRouteWithChildren
   '/search': typeof publicSearchRouteRoute
+  '/admin': typeof AuthAdminRouteRoute
+  '/client': typeof AuthClientRouteRoute
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
@@ -90,8 +116,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact-us': typeof ContactUsRouteWithChildren
+  '/login': typeof LoginRoute
   '/categories': typeof publicCategoriesRouteRouteWithChildren
   '/search': typeof publicSearchRouteRoute
+  '/admin': typeof AuthAdminRouteRoute
+  '/client': typeof AuthClientRouteRoute
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
@@ -101,10 +130,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/contact-us': typeof ContactUsRouteWithChildren
+  '/login': typeof LoginRoute
   '/(public)/categories': typeof publicCategoriesRouteRouteWithChildren
   '/(public)/search': typeof publicSearchRouteRoute
+  '/_auth/admin': typeof AuthAdminRouteRoute
+  '/_auth/client': typeof AuthClientRouteRoute
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/(public)/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
@@ -117,8 +150,11 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact-us'
+    | '/login'
     | '/categories'
     | '/search'
+    | '/admin'
+    | '/client'
     | '/contact-us/$country'
     | '/categories/$categoryId'
     | '/contact-us/$country/$city'
@@ -129,8 +165,11 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact-us'
+    | '/login'
     | '/categories'
     | '/search'
+    | '/admin'
+    | '/client'
     | '/contact-us/$country'
     | '/categories/$categoryId'
     | '/contact-us/$country/$city'
@@ -139,10 +178,14 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_auth'
     | '/about'
     | '/contact-us'
+    | '/login'
     | '/(public)/categories'
     | '/(public)/search'
+    | '/_auth/admin'
+    | '/_auth/client'
     | '/contact-us/$country'
     | '/(public)/categories/$categoryId'
     | '/contact-us/$country/$city'
@@ -152,14 +195,23 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   ContactUsRoute: typeof ContactUsRouteWithChildren
+  LoginRoute: typeof LoginRoute
   publicCategoriesRouteRoute: typeof publicCategoriesRouteRouteWithChildren
   publicSearchRouteRoute: typeof publicSearchRouteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact-us': {
       id: '/contact-us'
       path: '/contact-us'
@@ -172,6 +224,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -187,6 +246,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/contact-us/$country'
       preLoaderRoute: typeof ContactUsCountryRouteImport
       parentRoute: typeof ContactUsRoute
+    }
+    '/_auth/client': {
+      id: '/_auth/client'
+      path: '/client'
+      fullPath: '/client'
+      preLoaderRoute: typeof AuthClientRouteRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/_auth/admin': {
+      id: '/_auth/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthAdminRouteRouteImport
+      parentRoute: typeof AuthRouteRoute
     }
     '/(public)/search': {
       id: '/(public)/search'
@@ -232,6 +305,20 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthRouteRouteChildren {
+  AuthAdminRouteRoute: typeof AuthAdminRouteRoute
+  AuthClientRouteRoute: typeof AuthClientRouteRoute
+}
+
+const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthAdminRouteRoute: AuthAdminRouteRoute,
+  AuthClientRouteRoute: AuthClientRouteRoute,
+}
+
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
+  AuthRouteRouteChildren,
+)
 
 interface ContactUsCountryRouteChildren {
   ContactUsCountryCityRoute: typeof ContactUsCountryCityRoute
@@ -302,8 +389,10 @@ const publicCategoriesRouteRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRouteRoute: AuthRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   ContactUsRoute: ContactUsRouteWithChildren,
+  LoginRoute: LoginRoute,
   publicCategoriesRouteRoute: publicCategoriesRouteRouteWithChildren,
   publicSearchRouteRoute: publicSearchRouteRoute,
 }

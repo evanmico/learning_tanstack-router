@@ -1,10 +1,4 @@
-import {
-	createFileRoute,
-	Link,
-	Outlet,
-	useLoaderData,
-} from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { getCountries } from "@/lib/mock";
 
 export const Route = createFileRoute("/contact-us")({
@@ -39,7 +33,6 @@ function RouteComponent() {
 				))}
 			</div>
 			<Outlet />
-			<TanStackRouterDevtools />
 		</div>
 	);
 }
