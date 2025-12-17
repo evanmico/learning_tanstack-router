@@ -21,12 +21,15 @@ import { Route as publicSearchRouteRouteImport } from './routes/(public)/search/
 import { Route as publicCategoriesRouteRouteImport } from './routes/(public)/categories/route'
 import { Route as ContactUsCountryCityRouteImport } from './routes/contact-us.$country.$city'
 import { Route as AuthAdminReportsRouteImport } from './routes/_auth/admin/reports'
+import { Route as AuthChar123LocaleChar125BlogRouteRouteImport } from './routes/_auth/{-$locale}/blog/route'
 import { Route as AuthAdminCategoriesRouteRouteImport } from './routes/_auth/admin/categories/route'
 import { Route as publicCategoriesCategoryIdRouteRouteImport } from './routes/(public)/categories/$categoryId/route'
 import { Route as AuthAdminCategoriesCreateRouteImport } from './routes/_auth/admin/categories_.create'
+import { Route as AuthChar123LocaleChar125BlogTopicIdRouteRouteImport } from './routes/_auth/{-$locale}/blog/$topicId/route'
 import { Route as publicCategoriesCategoryIdSubcategoryIdRouteRouteImport } from './routes/(public)/categories/$categoryId/$subcategoryId/route'
 import { Route as AuthClientFilesSplatIndexRouteImport } from './routes/_auth/client/files/$/index'
 import { Route as AuthAdminCategoriesCategoryIdIndexRouteImport } from './routes/_auth/admin/categories/$categoryId/index'
+import { Route as AuthChar123LocaleChar125BlogTopicIdPostIdRouteRouteImport } from './routes/_auth/{-$locale}/blog/$topicId/$postId/route'
 import { Route as publicCategoriesCategoryIdSubcategoryIdProductIdRouteRouteImport } from './routes/(public)/categories/$categoryId/$subcategoryId/$productId/route'
 
 const LoginRoute = LoginRouteImport.update({
@@ -88,6 +91,12 @@ const AuthAdminReportsRoute = AuthAdminReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => AuthAdminRouteRoute,
 } as any)
+const AuthChar123LocaleChar125BlogRouteRoute =
+  AuthChar123LocaleChar125BlogRouteRouteImport.update({
+    id: '/{-$locale}/blog',
+    path: '/{-$locale}/blog',
+    getParentRoute: () => AuthRouteRoute,
+  } as any)
 const AuthAdminCategoriesRouteRoute =
   AuthAdminCategoriesRouteRouteImport.update({
     id: '/categories',
@@ -106,6 +115,12 @@ const AuthAdminCategoriesCreateRoute =
     path: '/categories/create',
     getParentRoute: () => AuthAdminRouteRoute,
   } as any)
+const AuthChar123LocaleChar125BlogTopicIdRouteRoute =
+  AuthChar123LocaleChar125BlogTopicIdRouteRouteImport.update({
+    id: '/$topicId',
+    path: '/$topicId',
+    getParentRoute: () => AuthChar123LocaleChar125BlogRouteRoute,
+  } as any)
 const publicCategoriesCategoryIdSubcategoryIdRouteRoute =
   publicCategoriesCategoryIdSubcategoryIdRouteRouteImport.update({
     id: '/$subcategoryId',
@@ -123,6 +138,12 @@ const AuthAdminCategoriesCategoryIdIndexRoute =
     id: '/$categoryId/',
     path: '/$categoryId/',
     getParentRoute: () => AuthAdminCategoriesRouteRoute,
+  } as any)
+const AuthChar123LocaleChar125BlogTopicIdPostIdRouteRoute =
+  AuthChar123LocaleChar125BlogTopicIdPostIdRouteRouteImport.update({
+    id: '/$postId',
+    path: '/$postId',
+    getParentRoute: () => AuthChar123LocaleChar125BlogTopicIdRouteRoute,
   } as any)
 const publicCategoriesCategoryIdSubcategoryIdProductIdRouteRoute =
   publicCategoriesCategoryIdSubcategoryIdProductIdRouteRouteImport.update({
@@ -143,11 +164,14 @@ export interface FileRoutesByFullPath {
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/admin/categories': typeof AuthAdminCategoriesRouteRouteWithChildren
+  '/{-$locale}/blog': typeof AuthChar123LocaleChar125BlogRouteRouteWithChildren
   '/admin/reports': typeof AuthAdminReportsRoute
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
   '/categories/$categoryId/$subcategoryId': typeof publicCategoriesCategoryIdSubcategoryIdRouteRouteWithChildren
+  '/{-$locale}/blog/$topicId': typeof AuthChar123LocaleChar125BlogTopicIdRouteRouteWithChildren
   '/admin/categories/create': typeof AuthAdminCategoriesCreateRoute
   '/categories/$categoryId/$subcategoryId/$productId': typeof publicCategoriesCategoryIdSubcategoryIdProductIdRouteRoute
+  '/{-$locale}/blog/$topicId/$postId': typeof AuthChar123LocaleChar125BlogTopicIdPostIdRouteRoute
   '/admin/categories/$categoryId': typeof AuthAdminCategoriesCategoryIdIndexRoute
   '/client/files/$': typeof AuthClientFilesSplatIndexRoute
 }
@@ -163,11 +187,14 @@ export interface FileRoutesByTo {
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/admin/categories': typeof AuthAdminCategoriesRouteRouteWithChildren
+  '/{-$locale}/blog': typeof AuthChar123LocaleChar125BlogRouteRouteWithChildren
   '/admin/reports': typeof AuthAdminReportsRoute
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
   '/categories/$categoryId/$subcategoryId': typeof publicCategoriesCategoryIdSubcategoryIdRouteRouteWithChildren
+  '/{-$locale}/blog/$topicId': typeof AuthChar123LocaleChar125BlogTopicIdRouteRouteWithChildren
   '/admin/categories/create': typeof AuthAdminCategoriesCreateRoute
   '/categories/$categoryId/$subcategoryId/$productId': typeof publicCategoriesCategoryIdSubcategoryIdProductIdRouteRoute
+  '/{-$locale}/blog/$topicId/$postId': typeof AuthChar123LocaleChar125BlogTopicIdPostIdRouteRoute
   '/admin/categories/$categoryId': typeof AuthAdminCategoriesCategoryIdIndexRoute
   '/client/files/$': typeof AuthClientFilesSplatIndexRoute
 }
@@ -185,11 +212,14 @@ export interface FileRoutesById {
   '/contact-us/$country': typeof ContactUsCountryRouteWithChildren
   '/(public)/categories/$categoryId': typeof publicCategoriesCategoryIdRouteRouteWithChildren
   '/_auth/admin/categories': typeof AuthAdminCategoriesRouteRouteWithChildren
+  '/_auth/{-$locale}/blog': typeof AuthChar123LocaleChar125BlogRouteRouteWithChildren
   '/_auth/admin/reports': typeof AuthAdminReportsRoute
   '/contact-us/$country/$city': typeof ContactUsCountryCityRoute
   '/(public)/categories/$categoryId/$subcategoryId': typeof publicCategoriesCategoryIdSubcategoryIdRouteRouteWithChildren
+  '/_auth/{-$locale}/blog/$topicId': typeof AuthChar123LocaleChar125BlogTopicIdRouteRouteWithChildren
   '/_auth/admin/categories_/create': typeof AuthAdminCategoriesCreateRoute
   '/(public)/categories/$categoryId/$subcategoryId/$productId': typeof publicCategoriesCategoryIdSubcategoryIdProductIdRouteRoute
+  '/_auth/{-$locale}/blog/$topicId/$postId': typeof AuthChar123LocaleChar125BlogTopicIdPostIdRouteRoute
   '/_auth/admin/categories/$categoryId/': typeof AuthAdminCategoriesCategoryIdIndexRoute
   '/_auth/client/files/$/': typeof AuthClientFilesSplatIndexRoute
 }
@@ -207,11 +237,14 @@ export interface FileRouteTypes {
     | '/contact-us/$country'
     | '/categories/$categoryId'
     | '/admin/categories'
+    | '/{-$locale}/blog'
     | '/admin/reports'
     | '/contact-us/$country/$city'
     | '/categories/$categoryId/$subcategoryId'
+    | '/{-$locale}/blog/$topicId'
     | '/admin/categories/create'
     | '/categories/$categoryId/$subcategoryId/$productId'
+    | '/{-$locale}/blog/$topicId/$postId'
     | '/admin/categories/$categoryId'
     | '/client/files/$'
   fileRoutesByTo: FileRoutesByTo
@@ -227,11 +260,14 @@ export interface FileRouteTypes {
     | '/contact-us/$country'
     | '/categories/$categoryId'
     | '/admin/categories'
+    | '/{-$locale}/blog'
     | '/admin/reports'
     | '/contact-us/$country/$city'
     | '/categories/$categoryId/$subcategoryId'
+    | '/{-$locale}/blog/$topicId'
     | '/admin/categories/create'
     | '/categories/$categoryId/$subcategoryId/$productId'
+    | '/{-$locale}/blog/$topicId/$postId'
     | '/admin/categories/$categoryId'
     | '/client/files/$'
   id:
@@ -248,11 +284,14 @@ export interface FileRouteTypes {
     | '/contact-us/$country'
     | '/(public)/categories/$categoryId'
     | '/_auth/admin/categories'
+    | '/_auth/{-$locale}/blog'
     | '/_auth/admin/reports'
     | '/contact-us/$country/$city'
     | '/(public)/categories/$categoryId/$subcategoryId'
+    | '/_auth/{-$locale}/blog/$topicId'
     | '/_auth/admin/categories_/create'
     | '/(public)/categories/$categoryId/$subcategoryId/$productId'
+    | '/_auth/{-$locale}/blog/$topicId/$postId'
     | '/_auth/admin/categories/$categoryId/'
     | '/_auth/client/files/$/'
   fileRoutesById: FileRoutesById
@@ -353,6 +392,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAdminReportsRouteImport
       parentRoute: typeof AuthAdminRouteRoute
     }
+    '/_auth/{-$locale}/blog': {
+      id: '/_auth/{-$locale}/blog'
+      path: '/{-$locale}/blog'
+      fullPath: '/{-$locale}/blog'
+      preLoaderRoute: typeof AuthChar123LocaleChar125BlogRouteRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
     '/_auth/admin/categories': {
       id: '/_auth/admin/categories'
       path: '/categories'
@@ -374,6 +420,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAdminCategoriesCreateRouteImport
       parentRoute: typeof AuthAdminRouteRoute
     }
+    '/_auth/{-$locale}/blog/$topicId': {
+      id: '/_auth/{-$locale}/blog/$topicId'
+      path: '/$topicId'
+      fullPath: '/{-$locale}/blog/$topicId'
+      preLoaderRoute: typeof AuthChar123LocaleChar125BlogTopicIdRouteRouteImport
+      parentRoute: typeof AuthChar123LocaleChar125BlogRouteRoute
+    }
     '/(public)/categories/$categoryId/$subcategoryId': {
       id: '/(public)/categories/$categoryId/$subcategoryId'
       path: '/$subcategoryId'
@@ -394,6 +447,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/categories/$categoryId'
       preLoaderRoute: typeof AuthAdminCategoriesCategoryIdIndexRouteImport
       parentRoute: typeof AuthAdminCategoriesRouteRoute
+    }
+    '/_auth/{-$locale}/blog/$topicId/$postId': {
+      id: '/_auth/{-$locale}/blog/$topicId/$postId'
+      path: '/$postId'
+      fullPath: '/{-$locale}/blog/$topicId/$postId'
+      preLoaderRoute: typeof AuthChar123LocaleChar125BlogTopicIdPostIdRouteRouteImport
+      parentRoute: typeof AuthChar123LocaleChar125BlogTopicIdRouteRoute
     }
     '/(public)/categories/$categoryId/$subcategoryId/$productId': {
       id: '/(public)/categories/$categoryId/$subcategoryId/$productId'
@@ -448,14 +508,47 @@ const AuthClientRouteRouteWithChildren = AuthClientRouteRoute._addFileChildren(
   AuthClientRouteRouteChildren,
 )
 
+interface AuthChar123LocaleChar125BlogTopicIdRouteRouteChildren {
+  AuthChar123LocaleChar125BlogTopicIdPostIdRouteRoute: typeof AuthChar123LocaleChar125BlogTopicIdPostIdRouteRoute
+}
+
+const AuthChar123LocaleChar125BlogTopicIdRouteRouteChildren: AuthChar123LocaleChar125BlogTopicIdRouteRouteChildren =
+  {
+    AuthChar123LocaleChar125BlogTopicIdPostIdRouteRoute:
+      AuthChar123LocaleChar125BlogTopicIdPostIdRouteRoute,
+  }
+
+const AuthChar123LocaleChar125BlogTopicIdRouteRouteWithChildren =
+  AuthChar123LocaleChar125BlogTopicIdRouteRoute._addFileChildren(
+    AuthChar123LocaleChar125BlogTopicIdRouteRouteChildren,
+  )
+
+interface AuthChar123LocaleChar125BlogRouteRouteChildren {
+  AuthChar123LocaleChar125BlogTopicIdRouteRoute: typeof AuthChar123LocaleChar125BlogTopicIdRouteRouteWithChildren
+}
+
+const AuthChar123LocaleChar125BlogRouteRouteChildren: AuthChar123LocaleChar125BlogRouteRouteChildren =
+  {
+    AuthChar123LocaleChar125BlogTopicIdRouteRoute:
+      AuthChar123LocaleChar125BlogTopicIdRouteRouteWithChildren,
+  }
+
+const AuthChar123LocaleChar125BlogRouteRouteWithChildren =
+  AuthChar123LocaleChar125BlogRouteRoute._addFileChildren(
+    AuthChar123LocaleChar125BlogRouteRouteChildren,
+  )
+
 interface AuthRouteRouteChildren {
   AuthAdminRouteRoute: typeof AuthAdminRouteRouteWithChildren
   AuthClientRouteRoute: typeof AuthClientRouteRouteWithChildren
+  AuthChar123LocaleChar125BlogRouteRoute: typeof AuthChar123LocaleChar125BlogRouteRouteWithChildren
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthAdminRouteRoute: AuthAdminRouteRouteWithChildren,
   AuthClientRouteRoute: AuthClientRouteRouteWithChildren,
+  AuthChar123LocaleChar125BlogRouteRoute:
+    AuthChar123LocaleChar125BlogRouteRouteWithChildren,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(

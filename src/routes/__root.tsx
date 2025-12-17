@@ -35,6 +35,7 @@ function RootComponent() {
 				<NavLink to="/contact-us">Contact Us</NavLink>
 				<NavLink to="/categories">Categories</NavLink>
 				<NavLink to="/search">Search</NavLink>
+				<NavLink to="/{-$locale}/blog">Blog</NavLink>
 				{isClient && <NavLink to="/client">Account</NavLink>}
 				{isAdmin && <NavLink to="/admin">Admin</NavLink>}
 				{isAuthenticated ? (
