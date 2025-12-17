@@ -1,4 +1,9 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import {
+	createFileRoute,
+	Link,
+	Outlet,
+	redirect,
+} from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth/client")({
 	component: RouteComponent,
@@ -10,5 +15,12 @@ export const Route = createFileRoute("/_auth/client")({
 });
 
 function RouteComponent() {
-	return <Outlet />;
+	return (
+		<>
+			<Link className="nav-link" to="/client/files/$">
+				Files
+			</Link>
+			<Outlet />
+		</>
+	);
 }

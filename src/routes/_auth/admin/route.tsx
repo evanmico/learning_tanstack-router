@@ -1,4 +1,9 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import {
+	createFileRoute,
+	Link,
+	Outlet,
+	redirect,
+} from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth/admin")({
 	component: RouteComponent,
@@ -10,5 +15,25 @@ export const Route = createFileRoute("/_auth/admin")({
 });
 
 function RouteComponent() {
-	return <Outlet />;
+	return (
+		<div className="space-x-2 space-y-3">
+			<Link
+				className="card"
+				activeProps={{ className: "active-card" }}
+				to="/admin/reports"
+			>
+				Reports
+			</Link>
+			<Link
+				className="card"
+				activeProps={{ className: "active-card" }}
+				activeOptions={{ exact: true }}
+				to="/admin/categories"
+			>
+				Categories
+			</Link>
+
+			<Outlet />
+		</div>
+	);
 }
